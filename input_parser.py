@@ -96,7 +96,7 @@ if __name__ == '__main__':
     f = open(sys.argv[1])
     global products
 
-    out = open("win.txt", "w")
+    out = open("tmp.txt", "w")
 
     rows, cols, drones, turns, payload = parse_header(f)
     np, products = parse_products(f)
@@ -118,9 +118,19 @@ if __name__ == '__main__':
                 for item, value in trip.c.iteritems():
                     print_deliver(out, i, order[0], item, value)                   
 
-            print_wait(out, i, int(ceil(longest_order-order[1][1])))
+            if order[1][1] != longest_order:
+                print_wait(out, i, int(ceil(longest_order-order[1][1])))
 
     out.close()
+
+    # count lines
+    file = open("tmp.txt", "r")
+    solution = open("win.txt", "w")
+    lines = file.readlines()
+    solution.write(str(len(lines)) + '\n')
+    for line in lines:
+        solution.write(line)
+    solution.close()
 
 
 
