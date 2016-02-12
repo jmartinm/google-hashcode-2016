@@ -107,7 +107,7 @@ if __name__ == '__main__':
     for order in orders:
         result[order['id']] = calculate_cost(order, warehouses[0], payload)
 
-    result = sorted(result.items(), key=lambda x: x[1][0], reverse=True)
+    result = sorted(result.items(), key=lambda x: x[1][0])
 
     for chunk in chunks(result, drones):
         longest_order = max([x[1][1] for x in chunk])
